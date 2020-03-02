@@ -1,10 +1,23 @@
+import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 
 public class PzzBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
+        SendMessage sendMessage = new SendMessage();
+        String massage=update.getMessage().getText();
         System.out.println(update.getMessage().getText());
+        if(massage.length()>0){
+            sendMessage.setText("Да пососі ті піску");
+        }
+        sendMessage.setChatId(update.getMessage().getChatId());
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getBotUsername() {
