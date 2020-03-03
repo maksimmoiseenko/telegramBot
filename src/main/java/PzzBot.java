@@ -3,16 +3,21 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import java.util.Scanner;
+
 
 public class PzzBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
+        Scanner scanner = new Scanner(System.in);
         SendMessage sendMessage = new SendMessage();
         String massage=update.getMessage().getText();
         System.out.println(update.getMessage().getText());
-        if(massage.length()>0){
-            sendMessage.setText("Да пососі ті піску");
-        }
+//        if(massage.length()>0){
+//            sendMessage.setText("Да пососі ті піску");
+//        }
+        sendMessage.setText(scanner.nextLine());
         sendMessage.setChatId(update.getMessage().getChatId());
+
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
